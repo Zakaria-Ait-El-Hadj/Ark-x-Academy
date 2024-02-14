@@ -1,0 +1,1 @@
+Temperature of Rio de Janeiro is: 30.4°C 
