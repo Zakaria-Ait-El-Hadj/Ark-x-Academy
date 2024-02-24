@@ -20,7 +20,7 @@ function readDataFromFile(path) {
     });
 }
 
-function writefile(path , content, dataFromController , message){
+function writefile(path , content, dataFromController , message){ // content is the data we wanna write inside our file
     return new Promise((resolve,reject) =>{
         fs.writeFile(path , content , (err) =>{
             if(err){
@@ -28,7 +28,9 @@ function writefile(path , content, dataFromController , message){
                 reject(err);
             }
             else{ 
-                console.log("blog with the Id :" , dataFromController , "was " , message ," successfully");
+                console.log(dataFromController)
+                const userOrBlog = !isNaN(dataFromController)? "blog with the Id " : "User";
+                console.log(userOrBlog , dataFromController , "was " , message ," successfully");
                 resolve(true);
             }
         });

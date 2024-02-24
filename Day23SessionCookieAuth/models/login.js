@@ -14,11 +14,11 @@ async function getAllUsers() {
 async function getUserId(username , password) {
     try {
        const data = await fileHelper.readDataFromFile("models/users.json");
-       const userIndex = data.findIndex(x => x.username == username);
-       const passwordMatch = await bcrypt.compare(password, data[userIndex].password);
+       const userIndex = data.findIndex(x => x.username == username); // we find the index of the user with the username of the req.body
+       const passwordMatch = await bcrypt.compare(password, data[userIndex].password); // we use the index to compare the password in req.body with the password of the user
             if (passwordMatch) {
                 const userId = data[userIndex].Id;
-                return userId;
+                return userId; // we return the userId to use it later on in our controller and store it in our req.session.userId
             }
        
     } catch (error) {
@@ -28,12 +28,12 @@ async function getUserId(username , password) {
 
 async function checkLogin(bodyData){
     let data = await getAllUsers();
-    const user = data.findIndex(x => x.username == bodyData.username);
-    if(user !== -1){
-        const passwordMatch = await bcrypt.compare(bodyData.password, data[user].password);
+    const userIndex = data.findIndex(x => x.username == bodyData.username);
+    if(userIndex !== -1){
+        const passwordMatch = await bcrypt.compare(bodyData.password, data[userIndex].password);
             if (passwordMatch) {
-                console.log(data[user])
-                return data[user]; 
+                console.log(data[userIndex])
+                return data[userIndex]; 
             }
         return false;
     }
@@ -44,7 +44,7 @@ async function checkLogin(bodyData){
 
 async function createAccount(bodyData){
     try{
-        if(bodyData != '{}'){
+        if(bodyData != '{}'){ // check if req.body is empty
             console.log(bodyData);
         const { username , password} = bodyData;
         const hashedP = await bcrypt.hash(password , 10);

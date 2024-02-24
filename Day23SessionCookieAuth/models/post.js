@@ -23,7 +23,7 @@ async function getAllPosts() {
 }
 
 
-async function createPost(dataPost , userId){
+async function createPost(dataPost , userId){ // dataPost is the req.body and userId is the req.session.userId
     try {
     if(JSON.stringify(dataPost) != '{}'){
     let data = await getAllPosts();
@@ -36,7 +36,7 @@ async function createPost(dataPost , userId){
     data.push(blog);
     const jsonData = JSON.stringify(data, null , 2);
 
-    await fileHelper.writefile("models/blog.json" , jsonData , dataPost.Id , "created" );
+    await fileHelper.writefile("models/blog.json" , jsonData , blog.BlogId , "created" );
     return true;
     }
     else{

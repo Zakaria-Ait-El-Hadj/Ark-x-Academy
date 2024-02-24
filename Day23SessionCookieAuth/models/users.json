@@ -13,5 +13,10 @@
     "Id": 2,
     "username": "zakaria3",
     "password": "$2b$10$l5kYlgl6ddd9c1Zchq2B8eM99wnfCfQcxtFXfdZ/2mY6.esdKpoTa"
+  },
+  {
+    "Id": 3,
+    "username": "zakaria4",
+    "password": "$2b$10$S1ClElpkNl2I2oissNecl.h.1ENsh0or9mXpOTdnvXld0CgouTLpi"
   }
 ]

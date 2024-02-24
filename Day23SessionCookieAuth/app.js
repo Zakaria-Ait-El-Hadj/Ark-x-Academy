@@ -15,7 +15,7 @@ app.use(
   session({
     secret: process.env.Token, // Secret key used to sign the session ID cookie
     resave: false, // Whether to save the session for every request, even if it hasn't changed
-    saveUninitialized: true // Whether to save uninitialized sessions (new but not modified)
+    saveUninitialized: false // Whether to save uninitialized sessions (new but not modified)
   })
 );
 
@@ -27,3 +27,4 @@ app.use(middleware.errorMiddleware);
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
   });
+

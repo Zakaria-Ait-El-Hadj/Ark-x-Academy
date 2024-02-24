@@ -7,7 +7,7 @@ const login = async (req,res,next) =>{
         const user = await model.checkLogin(req.body);
         const userId = await model.getUserId(username , password);
         if (user) {
-          req.session.userId = userId;
+          req.session.userId = userId; // we give our session the userId so we can make sure that the user can only manipulate his own blogs
           res.json("User connected successfully");
         } else {
             const err = new Error('There are no user with this username/password available');
@@ -42,6 +42,8 @@ const logout = (req,res,next) =>{
           return res.status(500).send('Error logging out');
         }
         res.clearCookie('connect.sid');
+        console.log(req.sessionID);
+        console.log(req.cookies)
         res.send("Logged out successfully");
       })
     }

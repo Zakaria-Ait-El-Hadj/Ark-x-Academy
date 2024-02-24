@@ -5,7 +5,7 @@ const getPosts = async (req,res,next) =>{
   try {
     const posts = await model.getAllPosts();
     if (posts) {
-        res.send(posts.filter(x => x.Id == req.session.userId));
+        res.send(posts.filter(x => x.Id == req.session.userId)); // only show the user his own blogs
     } else {
         const err = new Error('There are no blogs available');
         err.statusCode = 404;
