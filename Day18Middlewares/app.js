@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
-app.use(loggingMiddleware ,errorHandling);
+app.use(loggingMiddleware);
 
 const PORT = 3000;
 
@@ -18,48 +18,42 @@ function loggingMiddleware(req,res,next){
     const method = req.method;
     const url = req.url;
 
-    if(!req || !res){
-        const error = new Error("request or response object is missing");
-        return next(error);
-    }
-
-    if(!req.method || !req.url){
-        const error = new Error("Request method or URL is missing");
-        return next(error);
-    }
-
     console.log("Current Date : ",currentDate);
     console.log("Method : ",method);
     console.log("url : ",url);
     next();
 }
 
-function errorHandling( err , req ,res ,next){
+function errorHandling( err , req ,res){
     if(err){
         console.log('Error : ' , err.message);
-        res.send(`Error :  ${err.message}`);
-    }
-    else{
-        next();
-    }
+        res.status(500).json(err.message);
+    } 
 }
 
-app.get('/products' , (req,res) =>{
-    res.send(products);
+app.get('/products' , (req,res , next) =>{
+if(products.length !== 0){
+  res.send(products);
+}else{
+const err =  new Error('products empty');
+next(err);
+}
 });
 
-app.get('/products/:id' , (req,res) =>{
+app.get('/products/:id' , (req,res,next) =>{
    const paramsId = req.params.id;
    const result = products.find( x => x.id == paramsId);
    if(result){
     res.send(result);
    }
    else{
-    res.status(404).send("No product with this id");
+    const err = new Error("no product with this id");
+    throw err; 
    }
+   next();
 });
 
-app.get('/products/search', (req,res)=>{
+app.get('/products/search', (req,res,next)=>{
    const minPrice = req.query.minPrice;
    const maxPrice = req.query.maxPrice;
 
@@ -68,18 +62,19 @@ app.get('/products/search', (req,res)=>{
     res.send(result);
    }
    else{
-    res.status(404).send('No products found within this range');
-   }
+    const err = new Error("no product found with this range");
+    next(err);   }
 });
 
-app.post('/products' , (req,res)=>{
+app.post('/products' , (req,res,next)=>{
     const data = req.body;
     if(data){
     products.push({id : products.length + 1 , name : data.name , price : data.price});
     console.log(products);
     res.send(products);
     }else{
-        res.status(404).send('empty body data');
+        const err = new Error("empty body data");
+    next(err);
     }
 });
 
@@ -94,12 +89,13 @@ app.put('/products/:id' , (req,res) =>{
         res.send(products);
     }
     else{
-        res.status(404).send("there is no product to update with this id");
+        const err = new Error("there is no product to update with this id");
+    next(err);
     }  
    }
    else{
-    res.status(404).send('empty body');
-   }
+    const err = new Error("empty body");
+    next(err);   }
 });
 
 app.delete('/products/:id' , (req,res) =>{
@@ -109,9 +105,12 @@ app.delete('/products/:id' , (req,res) =>{
     products.splice(index,1);
     res.send(products);
    }else{
-    res.status(404).send("There is no product to delete with this id");
+    const err = new Error("There is no product to delete with this id");
+    next(err);
    }
 });
+
+app.use(errorHandling);
 
 app.listen(PORT, () =>{
    console.log('the server is listenning on port :',PORT);
