@@ -18,7 +18,7 @@ passport.use(new localStrategy(
        const bodydata = {username : username ,password : password};
        try{      
        let result = await model.checkLogin(bodydata);
-       if(!result){
+       if(result){
         return done(null,result);
        }
        else{        
@@ -30,5 +30,23 @@ passport.use(new localStrategy(
     }
     }
 ));
+
+passport.use('register' , new localStrategy(
+    async function(username , password , done){
+        const bodydata = {username : username , password : password};
+        try{
+          let result = await model.createAccount(bodydata);
+          if(result){
+            return done(null , result);
+          }
+          else{
+            return done(null,result);
+          }
+        }catch (err){
+            console.error("Error in Passport Local Strategy register:", err);
+            return done(err);
+        }
+    }
+))
 
 module.exports = passport;
