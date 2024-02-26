@@ -37,12 +37,12 @@ const getUsersValidationRules = () => {
     const authHeader = req.headers['authorization'];
     if (typeof authHeader !== 'undefined') {
         const authToken = authHeader.split(' ')[1];
-        jwt.verify(authToken, process.env.token, (err, decodedUser) => {
+        jwt.verify(authToken, process.env.token, (err, data) => {
             if (err) {
-                console.log(2)
+                console.log("erreur verifying token")
                 res.sendStatus(403); 
             } else {
-                req.user = decodedUser; 
+                req.user = data; 
                 next();
             }
         });
@@ -51,31 +51,6 @@ const getUsersValidationRules = () => {
     }
 }
 
-
-// function ensureToken(req, res, next) {
-//   const bearerHeader = req.headers['authorization'];
-//   if (typeof bearerHeader !== 'undefined') {
-//     const bearerToken = bearerHeader.split(' ')[1];
-//     req.token = bearerToken;
-//     next();
-//   } else {
-//     const err = new Error("Error ensuring token" ,err);
-//     err.statusCode = 403;
-//     throw err;
-//   }
-// }
-// function verifyToken(req,res,next) {
-//     jwt.verify(req.token, process.env.token , (err, data) => {
-//         if (err) {
-//         const err = new Error("Error verifying token" ,err);
-//         err.statusCode = 403;
-//         throw err;
-//         } else {
-//           res.user = data;
-//           next();
-//         }
-//       });
-// }
 
 module.exports = {
     loggingMiddleware,

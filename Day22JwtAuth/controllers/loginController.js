@@ -2,20 +2,6 @@ const model = require('../models/login');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-// const getUsers = async (req,res,next) =>{
-//     try {
-//       const posts = await model.getAllUsers();
-//       if (posts) {
-//           res.send(posts);
-//       } else {
-//           const err = new Error('There are no blogs available');
-//           err.statusCode = 404;
-//           throw err;
-//       }
-//      } catch (err){
-//       next(err);
-//   }
-// }
 
 const login = async (req,res,next) =>{
     try {
@@ -24,6 +10,7 @@ const login = async (req,res,next) =>{
         const userId = await model.getUserId(username , password);
         if (user) {
             const token = jwt.sign({Id : userId , username : username , password : password }, process.env.Token, { expiresIn: '1h' });
+            // res.setHeader('Authorization', 'Bearer ' + token);
             res.json({ token : token });
         } else {
             const err = new Error('There are no user with this username/password available');
