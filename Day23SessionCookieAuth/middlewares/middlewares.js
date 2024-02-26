@@ -1,6 +1,5 @@
 
 const { body, validationResult } = require('express-validator');
-const session = require('express-session');
 require('dotenv').config();
 
 
@@ -38,8 +37,8 @@ const getBlogsValidationRules = () => { // middleware to sanitize the user input
         body('Content').trim().isLength({ min: 4 }).escape(), 
         (req, res, next) => {
             const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
+            if (errors) {
+                return res.status(400).json({ errors });
             }
             next();
         }
@@ -51,7 +50,7 @@ const sessionVerification = (req,res,next) => {
     console.log(sessionId)
     console.log(req.cookies)
     const cookieId = req.cookies['connect.sid']?.split(':')[1].split('.')[0];  
-    if ( sessionId !== cookieId || !req.session.userId || !sessionId || !cookieId){
+    if ( sessionId !== cookieId || !req.session.userId ){
         const err = new Error('You are not authorized');
         err.statusCode = 401;
         throw err;

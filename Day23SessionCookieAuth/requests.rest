@@ -14,11 +14,11 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/posts/684
+PUT http://localhost:3000/posts/9079
 Content-Type: application/json
 
 {
-    "Title" : "updated",
+    "Title" : "up",
     "Content" : "updated"
 }
 

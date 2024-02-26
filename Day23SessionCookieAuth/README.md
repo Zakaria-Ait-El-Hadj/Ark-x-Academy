@@ -1,6 +1,6 @@
 Blog Backend with Node.js and Express
 
-This project is a simple blog backend built using Node.js and Express, with JSON files as the storage method. It implements CRUD operations for managing blog posts and includes custom middleware for logging, error handling, and sessions && cookies authentication to ensure that each user can only manipulate their own blogs.
+This project is a simple blog backend built using Node.js and Express, with JSON files as the storage method. It implements CRUD operations for managing blog posts and includes custom middleware for logging, error handling , input sanitization, and sessions && cookies authentication to ensure that each user can only manipulate their own blogs.
 
 Challenge Overview
 
@@ -9,7 +9,7 @@ Features
 CRUD Operations: Create, Read, Update, and Delete blog posts.
 Authentication and Authorization: sessions && cookies authentication to ensure that each user can only manipulate their own blogs.
 Persistence: JSON file storage for data.
-Middleware: Custom logging, error handling, and session verification middleware.
+Middleware: Custom logging, error handling, input sanitization,  and session verification middleware.
 
 Project Setup
 
@@ -49,11 +49,12 @@ Step 5: Middleware
 Logging Middleware: Create middleware that logs each request to the console including the method and the path.
 Error Handling Middleware: Implement error-handling middleware to catch and respond to any errors within the app.
 session Verification Middleware: Create middleware to verify session Id for authenticated routes, ensuring that each user can only manipulate their own blogs.
+User input sanitization.
 
 Step 6: Testing your Application
 
 Use Postman to test each of your routes and ensure they perform the expected CRUD operations.
-Test your middleware to ensure proper logging, error handling, and session verification.
+Test your middleware to ensure proper logging, error handling, input sanitization , and session verification.
 
 Deliverables
 
