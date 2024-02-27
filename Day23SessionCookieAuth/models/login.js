@@ -50,7 +50,7 @@ async function createAccount(bodyData){
         const hashedP = await bcrypt.hash(password , 10);
         const data = await fileHelper.readDataFromFile("models/users.json");
         const user = {
-            Id : data.length,
+            Id : data.length + 1,
             username : username,
             password : hashedP
         }
