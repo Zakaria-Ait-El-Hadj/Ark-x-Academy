@@ -1,0 +1,90 @@
+/* 2 - body styling */
+
+body {
+    background-color: lightblue;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+
+input{
+    height: 30px;
+    width: 200px;
+    background-color: rgb(206, 233, 224);
+    font-style: italic;
+}
+button {
+    height: 2.5rem;
+    width: auto;
+    background-color: green;
+    font-style: italic;
+}
+a {
+    text-decoration: none;
+}
+
+/* 3 - navbar styling */
+.navbar{
+    width: auto;
+    font-style: oblique;
+    background-color: blueviolet;
+    height: max-content;
+}
+.navbar > h1 > a {
+    font-weight: 900;
+    font-size: larger;
+    color: black;
+}
+
+/* 4 - footer styling */
+footer [href]{
+    background-color: aliceblue;
+    color: chocolate;
+}
+
+/* 5 - hero section styli */
+.hero{
+    background-color: bisque;
+}
+
+.hero > a {
+    color: brown;
+}
+
+#title{
+    font-size: larger;
+    font-weight: 900;
+}
+
+img ~ p{
+    font-weight: 700;
+}
+
+/* 6 - responsive touch*/
+
+.navbar > ul :hover {
+    font-size: large;
+}
+
+.navbar > input{
+    padding: 0;
+    margin: 0;
+    border : 2px solid;
+    border-color: black;
+}
+
+.navbar > input:focus{   
+    padding: 0;
+    margin: 0;
+    border: 5px solid;
+    border-color: red;
+}
+
+/* 7 - advanced techniques*/
+footer > ul > li ::before{
+    content:"- " ;
+}
+
+footer > ul > li :nth-child(odd){
+    background-color: blue;
+}
+
