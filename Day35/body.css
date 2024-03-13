@@ -1,0 +1,15 @@
+/* 2 - body styling */
+
+*{
+    margin: 10px 10px 10px 10px;
+}
+body {
+    background-color: rgb(34, 36, 37);
+    background-size: cover;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+a{
+    text-decoration: none;
+    color: white;
+}

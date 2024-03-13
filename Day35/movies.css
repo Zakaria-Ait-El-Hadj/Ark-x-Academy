@@ -1,0 +1,78 @@
+header {
+    background-image: url('images/covermovie.jpg');  
+    background-size: 100vw  90vh; 
+    background-repeat:no-repeat;
+    height : 90vh;
+}
+.img-cover-description{
+    display : flex;
+    flex-direction: column;
+    gap : 16px;
+    font-weight:700;
+    margin-left: 80px;
+}
+.img-cover-description > button{
+    width : -moz-fit-content;
+   width: fit-content;  
+}
+#text1{
+    font-size: 1rem;
+    color: pink;
+}
+#text2{
+    font-size: 2rem;
+    color: pink;
+}
+#text3{
+    font-size: 3rem;
+    color: pink;
+}
+#text4{
+    font-size: 1rem;
+    color: pink;
+}
+
+.flex-column-container{
+    display : flex;
+    flex-direction : column;
+    gap : 24px;
+    margin-bottom : 32px;
+    margin-top : 32px;
+}
+
+.flex-container{
+    display : flex;
+    align-items: center;
+    justify-content : space-between;
+}
+
+.flex-container > h3 {
+    font-size : 1.5rem;
+    font-weight : 900;
+}
+.flex-container > a {
+    font-size : 1rem;
+    font-weight : 600;
+}
+
+.cards-container{
+    display : flex;
+    gap : 16px;
+}
+.card-container{
+    display : flex;
+    flex-direction : column;
+    gap : 16px;
+}
+
+.card-container > img{
+    width : 20vw;
+    height : 60vh;
+    border-radius : 10px;
+
+}
+
+.card-container > h4 {
+    font-size : 1.2rem;
+    font-weight : 700;
+}
